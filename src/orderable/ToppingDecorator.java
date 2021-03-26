@@ -20,7 +20,7 @@ public class ToppingDecorator implements FoodBase {
 
     @Override
     public String getString() {
-        return inner.getString() + " with " + topping.getString();
+        return inner.getString() + ", " + topping.getString();
     }
 
     @Override

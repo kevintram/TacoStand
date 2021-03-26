@@ -6,7 +6,7 @@ package orderable;
 public final class Taco implements FoodBase {
     private final Protein protein;
 
-    Taco(Protein protein) {
+    public Taco(Protein protein) {
         this.protein = protein;
     }
 
@@ -17,7 +17,7 @@ public final class Taco implements FoodBase {
 
     @Override
     public String getString() {
-        return "$" + getPrice() + " Taco with " + protein;
+        return "$" + getPrice() + " Taco with " + protein.getString();
     }
 
     @Override

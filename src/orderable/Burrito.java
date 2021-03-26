@@ -6,7 +6,7 @@ package orderable;
 public final class Burrito implements FoodBase {
     private final Protein protein;
 
-    Burrito(Protein protein) {
+    public Burrito(Protein protein) {
         this.protein = protein;
     }
 

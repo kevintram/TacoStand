@@ -7,7 +7,7 @@ public final class Protein {
     private final String name;
     private final float price;
 
-    Protein(String name, float price) {
+    public Protein(String name, float price) {
         this.name = name;
         this.price = price;
     }

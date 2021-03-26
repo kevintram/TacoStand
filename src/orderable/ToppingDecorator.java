@@ -8,7 +8,7 @@ public class ToppingDecorator implements FoodBase {
     FoodBase inner;
     Topping topping;
 
-    ToppingDecorator(FoodBase inner, Topping topping) {
+    public ToppingDecorator(FoodBase inner, Topping topping) {
         this.inner = inner;
         this.topping = topping;
     }

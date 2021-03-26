@@ -6,7 +6,7 @@ package orderable;
 public final class Bowl implements FoodBase {
     private final Protein protein;
 
-    Bowl(Protein protein) {
+    public Bowl(Protein protein) {
         this.protein = protein;
     }
 

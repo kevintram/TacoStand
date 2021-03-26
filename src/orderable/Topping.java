@@ -7,7 +7,7 @@ public final class Topping {
     private final String name;
     private final float price;
 
-    Topping(String name, float price) {
+    public Topping(String name, float price) {
         this.name = name;
         this.price = price;
     }

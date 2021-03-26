@@ -3,7 +3,7 @@ package navigation;
 import java.util.Stack;
 
 /**
- * Class for managing the current menu and navigation between menus.
+ * Singleton for managing the current menu and navigation between menus.
  */
 public class MenuController {
     private static MenuController instance = null;
@@ -25,6 +25,8 @@ public class MenuController {
     }
 
     public void navigate(Menu menu) {
+        menu.onSetPrompt();
+        menu.onSetOptions();
         backStack.push(menu);
     }
 

@@ -8,13 +8,13 @@ import java.util.ArrayList;
 public class MainMenu extends Menu {
 
     @Override
-    protected String onSetPrompt() {
-        return "Choose something from the menu";
+    protected void onSetPrompt() {
+        prompt = "Choose something from the menu";
     }
 
     @Override
-    protected ArrayList<MenuOption> onSetOptions() {
-        ArrayList<MenuOption> options = new ArrayList<>();
+    protected void onSetOptions() {
+        options = new ArrayList<>();
 
         options.add(new MenuOption(
                 "Taco, Burrito, Bowl",
@@ -73,8 +73,6 @@ public class MainMenu extends Menu {
                 "Finish Order",
                 () -> MenuController.getInstance().popBackStack()
         ));
-
-        return options;
     }
 
     @Override

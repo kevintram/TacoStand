@@ -11,26 +11,19 @@ public abstract class Menu {
 
     /**
      * Set the prompt.
-     * @return the prompt.
      */
-    protected abstract String onSetPrompt();
+    protected abstract void onSetPrompt();
 
     /**
      * Set the options.
-     * @return the options
      */
-    protected abstract ArrayList<MenuOption> onSetOptions();
+    protected abstract void onSetOptions();
 
     /**
      * @return Indicates whether the navController should
      * continue popping after popping this menu.
      */
     public abstract boolean isPopBackStackInclusive();
-
-    public Menu() {
-        prompt = onSetPrompt();
-        options = onSetOptions();
-    }
 
     public final void print() {
         System.out.println(prompt + ":");

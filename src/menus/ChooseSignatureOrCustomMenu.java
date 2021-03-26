@@ -2,15 +2,16 @@ package menus;
 
 import navigation.Menu;
 import navigation.MenuOption;
-import orderable.FoodBase;
+import orderable.*;
+
 import java.util.ArrayList;
 
 public class ChooseSignatureOrCustomMenu extends Menu {
-    FoodBase foodBase;
+    FoodBaseType foodBaseType;
 
-    ChooseSignatureOrCustomMenu(FoodBase foodBase) {
+    ChooseSignatureOrCustomMenu(FoodBaseType foodBaseType) {
         super();
-        this.foodBase = foodBase;
+        this.foodBaseType = foodBaseType;
     }
 
     @Override
@@ -26,7 +27,10 @@ public class ChooseSignatureOrCustomMenu extends Menu {
                 "Bada Beef Bada Boom",
                 "steak, lettuce, corn, guac",
                 () -> {
-
+                    FoodBase food = getFood(foodBaseType, FoodDirectory.STEAK);
+                    food = new ToppingDecorator(food, FoodDirectory.LETTUCE);
+                    food = new ToppingDecorator(food, FoodDirectory.CORN);
+                    food = new ToppingDecorator(food, FoodDirectory.GUAC);
                 }
         ));
 
@@ -34,7 +38,10 @@ public class ChooseSignatureOrCustomMenu extends Menu {
                 "The Big Bean",
                 "beans, lettuce, salsa, corn",
                 () -> {
-
+                    FoodBase food = getFood(foodBaseType, FoodDirectory.BEANS);
+                    food = new ToppingDecorator(food, FoodDirectory.LETTUCE);
+                    food = new ToppingDecorator(food, FoodDirectory.SALSA);
+                    food = new ToppingDecorator(food, FoodDirectory.CORN);
                 }
         ));
 
@@ -42,7 +49,9 @@ public class ChooseSignatureOrCustomMenu extends Menu {
                 "The Shrimp Shack",
                 "shrimp, chili sauce, red onion",
                 () -> {
-
+                    FoodBase food = getFood(foodBaseType, FoodDirectory.SHRIMP);
+                    food = new ToppingDecorator(food, FoodDirectory.CHILI_SAUCE);
+                    food = new ToppingDecorator(food, FoodDirectory.RED_ONION);
                 }
         ));
 
@@ -54,8 +63,25 @@ public class ChooseSignatureOrCustomMenu extends Menu {
         ));
     }
 
+    private FoodBase getFood(FoodBaseType foodBaseType, Protein protein) {
+        return switch (foodBaseType) {
+            case TACO -> new Taco(protein);
+            case BURRITO -> new Burrito(protein);
+            case BOWL -> new Bowl(protein);
+        };
+    }
+
     @Override
     public boolean isPopBackStackInclusive() {
         return false;
+    }
+
+    /**
+     * FoodBase types supported by this menu
+     */
+    enum FoodBaseType {
+        TACO,
+        BURRITO,
+        BOWL
     }
 }

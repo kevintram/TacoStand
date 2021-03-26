@@ -3,9 +3,7 @@ package menus;
 import navigation.Menu;
 import navigation.MenuController;
 import navigation.MenuOption;
-import orderable.Protein;
-import orderable.Taco;
-
+import menus.ChooseSignatureOrCustomMenu.FoodBaseType;
 import java.util.ArrayList;
 
 public class ChooseBaseMenu extends Menu {
@@ -21,20 +19,22 @@ public class ChooseBaseMenu extends Menu {
 
         options.add(new MenuOption(
                 "Taco",
-                () -> MenuController.getInstance().navigate(
-                        new ChooseSignatureOrCustomMenu(new Taco(new Protein("Steak", 3.50f)))
-                )
+                () -> navigateToChooseSignatureOrCustomMenu(FoodBaseType.TACO)
         ));
 
         options.add(new MenuOption(
                 "Burrito",
-                () -> {}
+                () -> navigateToChooseSignatureOrCustomMenu(FoodBaseType.BURRITO)
         ));
 
         options.add(new MenuOption(
                 "Bowl",
-                () -> {}
+                () -> navigateToChooseSignatureOrCustomMenu(FoodBaseType.BOWL)
         ));
+    }
+
+    private void navigateToChooseSignatureOrCustomMenu(FoodBaseType foodBaseType) {
+        MenuController.getInstance().navigate(new ChooseSignatureOrCustomMenu(foodBaseType));
     }
 
     @Override

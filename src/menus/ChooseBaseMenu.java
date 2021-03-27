@@ -3,7 +3,6 @@ package menus;
 import navigation.Menu;
 import navigation.MenuController;
 import navigation.MenuOption;
-import menus.ChooseSignatureOrCustomMenu.FoodBaseType;
 import java.util.ArrayList;
 
 public class ChooseBaseMenu extends Menu {

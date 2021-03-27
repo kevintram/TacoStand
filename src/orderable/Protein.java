@@ -12,6 +12,9 @@ public final class Protein {
         this.price = price;
     }
 
-    String getString() { return name; }
-    float getPrice() { return price; }
+    public String getString() {
+        return "$" + String.format("%.2f", price) + " " + name;
+    }
+    public float getPrice() { return price; }
+    public String getName() { return name; }
 }

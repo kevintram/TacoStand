@@ -61,9 +61,7 @@ public class ChooseSignatureOrCustomMenu extends Menu {
 
         options.add(new MenuOption(
                 "Build your own",
-                () -> {
-
-                }
+                () -> MenuController.getInstance().navigate(new ChooseProteinMenu(foodBaseType))
         ));
 
         return options;
@@ -85,14 +83,5 @@ public class ChooseSignatureOrCustomMenu extends Menu {
     @Override
     public boolean isPopBackStackInclusive() {
         return true;
-    }
-
-    /**
-     * FoodBase types supported by this menu
-     */
-    enum FoodBaseType {
-        TACO,
-        BURRITO,
-        BOWL
     }
 }

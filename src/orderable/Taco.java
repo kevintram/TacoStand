@@ -21,7 +21,7 @@ public class Taco implements FoodBase {
 
     @Override
     public String getString() {
-        return "$" + getPrice() + " Taco with " + protein.getString();
+        return "$" + getPrice() + " Taco with " + protein.getName();
     }
 
     @Override

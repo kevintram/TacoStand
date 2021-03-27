@@ -21,7 +21,7 @@ public class Bowl implements FoodBase {
 
     @Override
     public String getString() {
-        return "$" + getPrice() + " Bowl with " + protein;
+        return "$" + getPrice() + " Bowl with " + protein.getName();
     }
 
     @Override

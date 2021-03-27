@@ -32,11 +32,13 @@ public class MenuController {
     public void popBackStack() {
         backStack.pop();
 
-        while (backStack.peek().isPopBackStackInclusive()) {
+        while (!backStack.isEmpty() && backStack.peek().isPopBackStackInclusive()) {
             backStack.pop();
         }
 
-        backStack.peek().onNavigated();
+        if (!backStack.isEmpty()) {
+            backStack.peek().onNavigated();
+        }
     }
 
     public boolean isEmpty() {

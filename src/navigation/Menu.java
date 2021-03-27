@@ -68,7 +68,9 @@ public abstract class Menu {
     }
 
     public final void choose(int choice) {
-        options.get(choice - 1).getOnChooseListener().onChoose();
+        if (choice <= options.size()) {
+            options.get(choice - 1).getOnChooseListener().onChoose();
+        }
     }
 }
 

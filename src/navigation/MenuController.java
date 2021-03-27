@@ -30,10 +30,10 @@ public class MenuController {
     }
 
     public void popBackStack() {
-        Menu popped = backStack.pop();
+        backStack.pop();
 
-        while (popped.isPopBackStackInclusive()) {
-            popped = backStack.pop();
+        while (backStack.peek().isPopBackStackInclusive()) {
+            backStack.pop();
         }
 
         backStack.peek().onNavigated();

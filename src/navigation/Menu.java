@@ -12,12 +12,27 @@ public abstract class Menu {
     /**
      * Set the prompt.
      */
-    protected abstract void onSetPrompt();
+    public void onSetPrompt() {
+        prompt = getPrompt();
+    }
 
     /**
      * Set the options.
      */
-    protected abstract void onSetOptions();
+    public void onSetOptions() {
+        options = getOptions();
+    }
+
+    /**
+     * @return the menu prompt.
+     */
+    protected abstract String getPrompt();
+
+    /**
+     *
+     * @return the array of options
+     */
+    protected abstract ArrayList<MenuOption> getOptions();
 
     /**
      * @return Indicates whether the navController should

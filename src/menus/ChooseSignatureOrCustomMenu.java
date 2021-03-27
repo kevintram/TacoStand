@@ -15,13 +15,13 @@ public class ChooseSignatureOrCustomMenu extends Menu {
     }
 
     @Override
-    protected void onSetPrompt() {
-        prompt = "Choose a signature or build your own";
+    protected String getPrompt() {
+        return "Choose a signature or build your own";
     }
 
     @Override
-    protected void onSetOptions() {
-        options = new ArrayList<>();
+    protected ArrayList<MenuOption> getOptions() {
+        ArrayList<MenuOption> options = new ArrayList<>();
 
         options.add(new MenuOption(
                 "Bada Beef Bada Boom",
@@ -61,6 +61,8 @@ public class ChooseSignatureOrCustomMenu extends Menu {
 
                 }
         ));
+
+        return options;
     }
 
     private FoodBase getFood(FoodBaseType foodBaseType, Protein protein) {

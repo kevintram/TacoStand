@@ -9,13 +9,13 @@ import java.util.ArrayList;
 public class ChooseBaseMenu extends Menu {
 
     @Override
-    protected void onSetPrompt() {
-        prompt =  "Choose a base";
+    protected String getPrompt() {
+        return "Choose a base";
     }
 
     @Override
-    protected void onSetOptions() {
-       options = new ArrayList<>();
+    protected ArrayList<MenuOption> getOptions() {
+        ArrayList<MenuOption> options = new ArrayList<>();
 
         options.add(new MenuOption(
                 "Taco",
@@ -31,6 +31,8 @@ public class ChooseBaseMenu extends Menu {
                 "Bowl",
                 () -> navigateToChooseSignatureOrCustomMenu(FoodBaseType.BOWL)
         ));
+
+        return options;
     }
 
     private void navigateToChooseSignatureOrCustomMenu(FoodBaseType foodBaseType) {

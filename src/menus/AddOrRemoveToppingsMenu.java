@@ -32,12 +32,12 @@ public class AddOrRemoveToppingsMenu extends Menu {
 
         options.add(new MenuOption(
                 "Remove a topping",
-                () -> MenuController.getInstance().navigate(new RemoveToppingMenu(food))
+                () -> MenuController.getInstance().navigate(new RemoveToppingMenu(food.getId()))
         ));
 
         options.add(new MenuOption(
                 "Add a topping",
-                () -> {}
+                () -> MenuController.getInstance().navigate(new AddToppingMenu(food.getId()))
         ));
 
         options.add(new MenuOption(

@@ -44,7 +44,7 @@ public class ToppingDecorator implements FoodBase {
         return this;
     }
 
-    public ArrayList<Topping> getToppings() {
+    public Topping[] getToppings() {
         ArrayList<Topping> toppings = new ArrayList<>();
 
         toppings.add(topping);
@@ -56,7 +56,8 @@ public class ToppingDecorator implements FoodBase {
             inner = ((ToppingDecorator) inner).inner;
         }
 
-        return toppings;
+        Topping[] arr = new Topping[toppings.size()];
+        return toppings.toArray(arr);
     }
 
     @Override

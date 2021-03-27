@@ -8,25 +8,20 @@ import orderable.Topping;
 import orderable.ToppingDecorator;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
-public class RemoveToppingMenu extends Menu {
+public class AddToppingMenu extends Menu {
     FoodBase food;
 
-    RemoveToppingMenu(UUID id) {
-        this.food = (FoodBase) Order.getOrderable(id);
+    AddToppingMenu(UUID id) {
+        food = (FoodBase) Order.getOrderable(id);
     }
 
     @Override
     protected String getPrompt() {
-        return "Choose a topping to remove";
-    }
-
-    @Override
-    public void printPrefix() {
-        if (!(food instanceof ToppingDecorator)) {
-            System.out.println("You don't have any toppings!");
-        }
+        return "Choose a topping to add";
     }
 
     @Override
@@ -34,23 +29,27 @@ public class RemoveToppingMenu extends Menu {
         ArrayList<MenuOption> options = new ArrayList<>();
 
         if (food instanceof ToppingDecorator) {
-            Topping[] toppings = ((ToppingDecorator) food).getToppings();
+            Set<Topping> unaddedToppings = new HashSet<>(Set.of(FoodDirectory.TOPPINGS));
 
-            for (Topping t : toppings) {
+            Set<Topping> addedToppings =
+                    (food instanceof ToppingDecorator)? Set.of(((ToppingDecorator) food).getToppings()) : Set.of();
+
+            unaddedToppings.removeAll(addedToppings);
+
+            for (Topping t : unaddedToppings) {
                 options.add(new MenuOption(
                         t.getString(),
                         () -> {
-                            food = ((ToppingDecorator) food).remove(t);
+                            food = new ToppingDecorator(food, t);
                             Order.updateOrderable(food);
                             MenuController.getInstance().popBackStack();
                         }
                 ));
             }
-
         }
 
         options.add(new MenuOption(
-                "Go Back",
+                "Cancel",
                 () -> MenuController.getInstance().popBackStack()
         ));
 

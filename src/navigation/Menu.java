@@ -40,8 +40,14 @@ public abstract class Menu {
      */
     public abstract boolean isPopBackStackInclusive();
 
+    /**
+     * Override this to print something after the prompt but before the options.
+     */
+    public void printPrefix() {}
+
     public final void print() {
         System.out.println(prompt + ":");
+        printPrefix();
         for (int i = 0; i < options.size(); i++) {
             MenuOption o = options.get(i);
 

@@ -1,6 +1,7 @@
 package menus;
 
 import navigation.Menu;
+import navigation.MenuController;
 import navigation.MenuOption;
 import orderable.*;
 
@@ -31,6 +32,7 @@ public class ChooseSignatureOrCustomMenu extends Menu {
                     food = new ToppingDecorator(food, FoodDirectory.LETTUCE);
                     food = new ToppingDecorator(food, FoodDirectory.CORN);
                     food = new ToppingDecorator(food, FoodDirectory.GUAC);
+                    navigateToRemoveOrAddToppings(food);
                 }
         ));
 
@@ -42,6 +44,7 @@ public class ChooseSignatureOrCustomMenu extends Menu {
                     food = new ToppingDecorator(food, FoodDirectory.LETTUCE);
                     food = new ToppingDecorator(food, FoodDirectory.SALSA);
                     food = new ToppingDecorator(food, FoodDirectory.CORN);
+                    navigateToRemoveOrAddToppings(food);
                 }
         ));
 
@@ -52,6 +55,7 @@ public class ChooseSignatureOrCustomMenu extends Menu {
                     FoodBase food = getFood(foodBaseType, FoodDirectory.SHRIMP);
                     food = new ToppingDecorator(food, FoodDirectory.CHILI_SAUCE);
                     food = new ToppingDecorator(food, FoodDirectory.RED_ONION);
+                    navigateToRemoveOrAddToppings(food);
                 }
         ));
 
@@ -71,6 +75,10 @@ public class ChooseSignatureOrCustomMenu extends Menu {
             case BURRITO -> new Burrito(protein);
             case BOWL -> new Bowl(protein);
         };
+    }
+
+    private void navigateToRemoveOrAddToppings(FoodBase food) {
+        MenuController.getInstance().navigate(new AddOrRemoveToppingsMenu(food));
     }
 
     @Override

@@ -3,6 +3,8 @@ package menus;
 import navigation.Menu;
 import navigation.MenuController;
 import navigation.MenuOption;
+import orderable.Orderable;
+
 import java.util.ArrayList;
 
 public class MainMenu extends Menu {
@@ -71,7 +73,13 @@ public class MainMenu extends Menu {
 
         options.add(new MenuOption(
                 "Finish Order",
-                () -> MenuController.getInstance().popBackStack()
+                () -> {
+                    System.out.println("Here is your order: ");
+                    for (Orderable o : Order.getOrder()) {
+                        System.out.println(o.getString());
+                    }
+                    MenuController.getInstance().popBackStack();
+                }
         ));
 
         return options;

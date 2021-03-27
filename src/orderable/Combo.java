@@ -1,16 +1,20 @@
 package orderable;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * A class that represents a combination of orderables.
  */
 public class Combo implements Orderable {
 
+    private UUID id;
+
     private final ArrayList<Orderable> children;
 
     Combo() {
         children = new ArrayList<>();
+        id = UUID.randomUUID();
     }
 
     public void add(Orderable orderable) {
@@ -39,5 +43,15 @@ public class Combo implements Orderable {
             p += orderable.getPrice();
         }
         return p;
+    }
+
+    @Override
+    public UUID getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(UUID id) {
+        this.id = id;
     }
 }

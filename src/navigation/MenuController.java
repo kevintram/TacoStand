@@ -25,8 +25,7 @@ public class MenuController {
     }
 
     public void navigate(Menu menu) {
-        menu.onSetPrompt();
-        menu.onSetOptions();
+        menu.onNavigated();
         backStack.push(menu);
     }
 
@@ -36,6 +35,8 @@ public class MenuController {
         while (popped.isPopBackStackInclusive()) {
             popped = backStack.pop();
         }
+
+        backStack.peek().onNavigated();
     }
 
     public boolean isEmpty() {

@@ -1,13 +1,17 @@
 package orderable;
 
+import java.util.UUID;
+
 /**
  * Class that represents a bowl
  */
-public final class Bowl implements FoodBase {
+public class Bowl implements FoodBase {
     private final Protein protein;
+    private UUID id;
 
     public Bowl(Protein protein) {
         this.protein = protein;
+        id = UUID.randomUUID();
     }
 
     @Override
@@ -23,5 +27,15 @@ public final class Bowl implements FoodBase {
     @Override
     public float getPrice() {
         return protein.getPrice() + 3.99f;
+    }
+
+    @Override
+    public UUID getId() {
+        return null;
+    }
+
+    @Override
+    public void setId(UUID id) {
+        this.id = id;
     }
 }

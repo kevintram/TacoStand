@@ -1,16 +1,24 @@
 package menus;
 
 import navigation.Menu;
+import navigation.MenuController;
 import navigation.MenuOption;
 import orderable.FoodBase;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class AddOrRemoveToppingsMenu extends Menu {
-    FoodBase food;
+    private FoodBase food;
 
-    AddOrRemoveToppingsMenu(FoodBase food) {
-        this.food = food;
+    AddOrRemoveToppingsMenu(UUID foodId) {
+        food = (FoodBase) Order.getOrderable(foodId);
+    }
+
+    @Override
+    public void onNavigated() {
+        food = (FoodBase) Order.getOrderable(food.getId());
+        super.onNavigated();
     }
 
     @Override
@@ -24,7 +32,7 @@ public class AddOrRemoveToppingsMenu extends Menu {
 
         options.add(new MenuOption(
                 "Remove a topping",
-                () -> {}
+                () -> MenuController.getInstance().navigate(new RemoveToppingMenu(food))
         ));
 
         options.add(new MenuOption(

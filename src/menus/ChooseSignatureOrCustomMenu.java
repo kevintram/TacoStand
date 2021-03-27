@@ -78,7 +78,8 @@ public class ChooseSignatureOrCustomMenu extends Menu {
     }
 
     private void navigateToRemoveOrAddToppings(FoodBase food) {
-        MenuController.getInstance().navigate(new AddOrRemoveToppingsMenu(food));
+        Order.insertOrderable(food);
+        MenuController.getInstance().navigate(new AddOrRemoveToppingsMenu(food.getId()));
     }
 
     @Override

@@ -41,6 +41,6 @@ public class ChooseBaseMenu extends Menu {
 
     @Override
     public boolean isPopBackStackInclusive() {
-        return false;
+        return true;
     }
 }

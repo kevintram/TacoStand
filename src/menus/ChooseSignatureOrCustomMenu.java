@@ -84,7 +84,7 @@ public class ChooseSignatureOrCustomMenu extends Menu {
 
     @Override
     public boolean isPopBackStackInclusive() {
-        return false;
+        return true;
     }
 
     /**

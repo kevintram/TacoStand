@@ -42,7 +42,7 @@ public class AddOrRemoveToppingsMenu extends Menu {
 
         options.add(new MenuOption(
                 "Finish",
-                () -> {}
+                () -> MenuController.getInstance().popBackStack()
         ));
 
         return options;

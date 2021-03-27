@@ -28,25 +28,25 @@ public class AddToppingMenu extends Menu {
     protected ArrayList<MenuOption> getOptions() {
         ArrayList<MenuOption> options = new ArrayList<>();
 
-        if (food instanceof ToppingDecorator) {
-            Set<Topping> unaddedToppings = new HashSet<>(Set.of(FoodDirectory.TOPPINGS));
 
-            Set<Topping> addedToppings =
-                    (food instanceof ToppingDecorator)? Set.of(((ToppingDecorator) food).getToppings()) : Set.of();
+        Set<Topping> unaddedToppings = new HashSet<>(Set.of(FoodDirectory.TOPPINGS));
 
-            unaddedToppings.removeAll(addedToppings);
+        Set<Topping> addedToppings =
+                (food instanceof ToppingDecorator)? Set.of(((ToppingDecorator) food).getToppings()) : Set.of();
 
-            for (Topping t : unaddedToppings) {
-                options.add(new MenuOption(
-                        t.getString(),
-                        () -> {
-                            food = new ToppingDecorator(food, t);
-                            Order.updateOrderable(food);
-                            MenuController.getInstance().popBackStack();
-                        }
-                ));
-            }
+        unaddedToppings.removeAll(addedToppings);
+
+        for (Topping t : unaddedToppings) {
+            options.add(new MenuOption(
+                    t.getString(),
+                    () -> {
+                        food = new ToppingDecorator(food, t);
+                        Order.updateOrderable(food);
+                        MenuController.getInstance().popBackStack();
+                    }
+            ));
         }
+
 
         options.add(new MenuOption(
                 "Cancel",

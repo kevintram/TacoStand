@@ -7,8 +7,6 @@ import orderable.Combo;
 import orderable.Orderable;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
 
 public class MainMenu extends Menu {
 
@@ -30,12 +28,14 @@ public class MainMenu extends Menu {
                 "Taco Salad",
                 "bowl with 3 crushed tacos" ,
                 () -> {
-                    Queue<FoodBaseType> foodQueue = new LinkedList<>();
+                    Combo combo = new Combo("Taco Salad","bowl with 3 crushed tacos");
+                    ComboManager comboManager = new ComboManager(combo, Order::insertOrderable);
+
                     for (int i = 0; i < 3; i++) {
-                        foodQueue.add(FoodBaseType.TACO);
+                        comboManager.queue(new FoodManager(FoodBaseType.TACO, combo::add));
                     }
 
-                    Combo combo = new Combo("Taco Salad","bowl with 3 crushed tacos");
+                    navigateToComboChooseSignatureOrCustomMenu(comboManager);
                 }
         ));
 
@@ -51,12 +51,14 @@ public class MainMenu extends Menu {
                 "Order of Tacos",
                 "3 tacos",
                 () -> {
-                    Queue<FoodBaseType> foodQueue = new LinkedList<>();
-                    for (int i = 0; i < 3; i++) {
-                        foodQueue.add(FoodBaseType.TACO);
+                    Combo combo = new Combo("Order of Tacos", "3 tacos");
+                    ComboManager comboManager = new ComboManager(combo, Order::insertOrderable);
+
+                    for (int j = 0; j < 3; j++) {
+                        comboManager.queue(new FoodManager(FoodBaseType.TACO, combo::add));
                     }
 
-                    Combo combo = new Combo("Order of Tacos","3 tacos");
+                    navigateToComboChooseSignatureOrCustomMenu(comboManager);
                 }
         ));
 
@@ -64,13 +66,14 @@ public class MainMenu extends Menu {
                 "Traveler's Pack",
                 "2 tacos, 1 burrito",
                 () -> {
-                    Queue<FoodBaseType> foodQueue = new LinkedList<>();
-                    foodQueue.add(FoodBaseType.TACO);
-                    foodQueue.add(FoodBaseType.TACO);
-                    foodQueue.add(FoodBaseType.BURRITO);
-
-
                     Combo combo = new Combo("Traveler's Pack","2 tacos and 1 burrito");
+                    ComboManager comboManager = new ComboManager(combo, Order::insertOrderable);
+
+                    comboManager.queue(new FoodManager(FoodBaseType.TACO, combo::add));
+                    comboManager.queue(new FoodManager(FoodBaseType.TACO, combo::add));
+                    comboManager.queue(new FoodManager(FoodBaseType.BURRITO, combo::add));
+
+                    navigateToComboChooseSignatureOrCustomMenu(comboManager);
                 }
         ));
 
@@ -78,12 +81,14 @@ public class MainMenu extends Menu {
                 "Sampler Pack",
                 "1 taco, 1 burrito, 1 bowl",
                 () -> {
-                    Queue<FoodBaseType> foodQueue = new LinkedList<>();
-                    foodQueue.add(FoodBaseType.TACO);
-                    foodQueue.add(FoodBaseType.BURRITO);
-                    foodQueue.add(FoodBaseType.BOWL);
-
                     Combo combo = new Combo("Sampler","1 taco, 1 burrito, 1 bowl");
+                    ComboManager comboManager = new ComboManager(combo, Order::insertOrderable);
+
+                    comboManager.queue(new FoodManager(FoodBaseType.TACO, combo::add));
+                    comboManager.queue(new FoodManager(FoodBaseType.BURRITO, combo::add));
+                    comboManager.queue(new FoodManager(FoodBaseType.BOWL, combo::add));
+
+                    navigateToComboChooseSignatureOrCustomMenu(comboManager);
                 }
         ));
 
@@ -91,9 +96,25 @@ public class MainMenu extends Menu {
                 "Party Platter",
                 "3 orders of tacos, 2 burritos, 1 bowl",
                 () -> {
-
-
                     Combo combo = new Combo("Party Platter", "3 Orders of Tacos, 2 Burritos, 1 Bowl");
+                    ComboManager comboManager = new ComboManager(combo, Order::insertOrderable);
+
+                    for (int i = 0; i < 3; i++) {
+                        Combo order = new Combo("Order of Tacos", "3 tacos");
+                        ComboManager orderManager = new ComboManager(order, combo::add);
+                        for (int j = 0; j < 3; j++) {
+                            orderManager.queue(new FoodManager(FoodBaseType.TACO, order::add));
+                        }
+                        comboManager.queue(orderManager);
+                    }
+
+                    for (int i = 0; i < 2; i++) {
+                        comboManager.queue(new FoodManager(FoodBaseType.BURRITO, combo::add));
+                    }
+
+                    comboManager.queue(new FoodManager(FoodBaseType.BOWL, combo::add));
+
+                    navigateToComboChooseSignatureOrCustomMenu(comboManager);
                 }
         ));
 
@@ -108,6 +129,12 @@ public class MainMenu extends Menu {
                 }
         ));
         return options;
+    }
+
+    private void navigateToComboChooseSignatureOrCustomMenu(ComboManager comboManager) {
+        // insert into the Order now because don't have to worry about adding a decorator
+        comboManager.onOrderableFinishedListener.onOrderableFinished(comboManager.getOrderable());
+        MenuController.getInstance().navigate(new ComboChooseSignatureOrCustomMenu(comboManager));
     }
 
 

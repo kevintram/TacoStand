@@ -5,7 +5,7 @@ import orderable.*;
 public class FoodManager extends OrderableManager {
     private FoodBase food;
     private FoodBaseType foodBaseType;
-
+    // take in a foodBaseType because we won't protein the user wants until later
     FoodManager(FoodBaseType foodBaseType, OnOrderableFinishedListener onOrderableFinishedListener) {
         super(onOrderableFinishedListener);
         this.foodBaseType = foodBaseType;
@@ -17,6 +17,10 @@ public class FoodManager extends OrderableManager {
             case BURRITO -> new Burrito(protein);
             case BOWL -> new Bowl(protein);
         };
+    }
+
+    public FoodBaseType getFoodBaseType() {
+        return foodBaseType;
     }
 
     @Override

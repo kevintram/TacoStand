@@ -10,25 +10,11 @@ public abstract class Menu {
     protected String prompt;
 
     /**
-     * Called whenever this menu is navigated to. This is where your menu
-     * should update its state if it has any.
+     * Called whenever this menu is navigated to. If your menu has state that can may have
+     * been updated, you should update it in here.
      */
     public void onNavigated() {
-        onSetPrompt();
-        onSetOptions();
-    }
-
-    /**
-     * Set the prompt.
-     */
-    protected void onSetPrompt() {
         prompt = getPrompt();
-    }
-
-    /**
-     * Set the options.
-     */
-    protected void onSetOptions() {
         options = getOptions();
     }
 

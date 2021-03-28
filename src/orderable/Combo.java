@@ -13,10 +13,6 @@ public class Combo implements Orderable {
     private String name;
     private String description;
 
-    public Combo() {
-        this("", "");
-    }
-
     public Combo(String name, String description) {
         children = new ArrayList<>();
         id = UUID.randomUUID();

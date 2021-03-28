@@ -126,9 +126,17 @@ public class MainMenu extends Menu {
                 "Finish Order",
                 () -> {
                     System.out.println("Here is your order: ");
+                    float total = 0f;
+                    StringBuilder sb = new StringBuilder();
+
                     for (Orderable o : Order.getOrder()) {
-                        System.out.println(o.getString());
+                        total += o.getPrice();
+                        sb.append(o.getString()).append("\n");
                     }
+
+                    System.out.println("Total: $" + String.format("%.2f",total));
+                    System.out.println(sb);
+
                     MenuController.getInstance().popBackStack();
                 }
         ));

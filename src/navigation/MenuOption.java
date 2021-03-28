@@ -1,7 +1,7 @@
 package navigation;
 
 /**
- * A data class for storing an option and it's description and how to handle when it's chosen.
+ * A data class for storing an option and its description and how to handle when it's chosen.
  */
 public final class MenuOption {
     private final String option;

@@ -36,7 +36,6 @@ public class MainMenu extends Menu {
                     }
 
                     Combo combo = new Combo("Taco Salad","bowl with 3 crushed tacos");
-                    navigateToComboChooseSignatureOrCustom(foodQueue, combo);
                 }
         ));
 
@@ -58,7 +57,6 @@ public class MainMenu extends Menu {
                     }
 
                     Combo combo = new Combo("Order of Tacos","3 tacos");
-                    navigateToComboChooseSignatureOrCustom(foodQueue, combo);
                 }
         ));
 
@@ -73,7 +71,6 @@ public class MainMenu extends Menu {
 
 
                     Combo combo = new Combo("Traveler's Pack","2 tacos and 1 burrito");
-                    navigateToComboChooseSignatureOrCustom(foodQueue, combo);
                 }
         ));
 
@@ -87,7 +84,6 @@ public class MainMenu extends Menu {
                     foodQueue.add(FoodBaseType.BOWL);
 
                     Combo combo = new Combo("Sampler","1 taco, 1 burrito, 1 bowl");
-                    navigateToComboChooseSignatureOrCustom(foodQueue, combo);
                 }
         ));
 
@@ -96,6 +92,8 @@ public class MainMenu extends Menu {
                 "3 orders of tacos, 2 burritos, 1 bowl",
                 () -> {
 
+
+                    Combo combo = new Combo("Party Platter", "3 Orders of Tacos, 2 Burritos, 1 Bowl");
                 }
         ));
 
@@ -112,9 +110,6 @@ public class MainMenu extends Menu {
         return options;
     }
 
-    private void navigateToComboChooseSignatureOrCustom(Queue<FoodBaseType> foodQueue, Combo combo) {
-        MenuController.getInstance().navigate(new ComboChooseSignatureOrCustomMenu(foodQueue, combo));
-    }
 
     @Override
     public boolean isPopBackStackInclusive() {

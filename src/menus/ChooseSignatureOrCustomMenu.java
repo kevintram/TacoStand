@@ -8,11 +8,11 @@ import orderable.*;
 import java.util.ArrayList;
 
 public class ChooseSignatureOrCustomMenu extends Menu {
-    FoodBaseType foodBaseType;
+    FoodManager foodManager;
 
-    ChooseSignatureOrCustomMenu(FoodBaseType foodBaseType) {
+    ChooseSignatureOrCustomMenu(FoodManager foodManager) {
         super();
-        this.foodBaseType = foodBaseType;
+        this.foodManager = foodManager;
     }
 
     @Override
@@ -28,11 +28,11 @@ public class ChooseSignatureOrCustomMenu extends Menu {
                 "Bada Beef Bada Boom",
                 "steak, lettuce, corn, guac",
                 () -> {
-                    FoodBase food = getFood(foodBaseType, FoodDirectory.STEAK);
-                    food = new ToppingDecorator(food, FoodDirectory.LETTUCE);
-                    food = new ToppingDecorator(food, FoodDirectory.CORN);
-                    food = new ToppingDecorator(food, FoodDirectory.GUAC);
-                    navigateToRemoveOrAddToppings(food);
+                    foodManager.initFood(FoodDirectory.STEAK);
+                    foodManager.setOrderable(getToppingDecorator(FoodDirectory.LETTUCE));
+                    foodManager.setOrderable(getToppingDecorator(FoodDirectory.CORN));
+                    foodManager.setOrderable(getToppingDecorator(FoodDirectory.GUAC));
+                    navigateToRemoveOrAddToppings();
                 }
         ));
 
@@ -40,11 +40,11 @@ public class ChooseSignatureOrCustomMenu extends Menu {
                 "The Big Bean",
                 "beans, lettuce, salsa, corn",
                 () -> {
-                    FoodBase food = getFood(foodBaseType, FoodDirectory.BEANS);
-                    food = new ToppingDecorator(food, FoodDirectory.LETTUCE);
-                    food = new ToppingDecorator(food, FoodDirectory.SALSA);
-                    food = new ToppingDecorator(food, FoodDirectory.CORN);
-                    navigateToRemoveOrAddToppings(food);
+                    foodManager.initFood(FoodDirectory.BEANS);
+                    foodManager.setOrderable(getToppingDecorator(FoodDirectory.LETTUCE));
+                    foodManager.setOrderable(getToppingDecorator(FoodDirectory.SALSA));
+                    foodManager.setOrderable(getToppingDecorator(FoodDirectory.CORN));
+                    navigateToRemoveOrAddToppings();
                 }
         ));
 
@@ -52,36 +52,27 @@ public class ChooseSignatureOrCustomMenu extends Menu {
                 "The Shrimp Shack",
                 "shrimp, chili sauce, red onion",
                 () -> {
-                    FoodBase food = getFood(foodBaseType, FoodDirectory.SHRIMP);
-                    food = new ToppingDecorator(food, FoodDirectory.CHILI_SAUCE);
-                    food = new ToppingDecorator(food, FoodDirectory.RED_ONION);
-                    navigateToRemoveOrAddToppings(food);
+                    foodManager.initFood(FoodDirectory.SHRIMP);
+                    foodManager.setOrderable(getToppingDecorator(FoodDirectory.CHILI_SAUCE));
+                    foodManager.setOrderable(getToppingDecorator(FoodDirectory.RED_ONION));
+                    navigateToRemoveOrAddToppings();
                 }
         ));
 
         options.add(new MenuOption(
                 "Build your own",
-                () -> navigateToChooseProteinMenu(foodBaseType)
+                () -> MenuController.getInstance().navigate(new ChooseProteinMenu(foodManager))
         ));
 
         return options;
     }
 
-    private FoodBase getFood(FoodBaseType foodBaseType, Protein protein) {
-        return switch (foodBaseType) {
-            case TACO -> new Taco(protein);
-            case BURRITO -> new Burrito(protein);
-            case BOWL -> new Bowl(protein);
-        };
+    private ToppingDecorator getToppingDecorator(Topping topping) {
+        return new ToppingDecorator(foodManager.getOrderable(), topping);
     }
 
-    protected void navigateToRemoveOrAddToppings(FoodBase food) {
-        Order.insertOrderable(food);
-        MenuController.getInstance().navigate(new AddOrRemoveToppingsMenu(food.getId()));
-    }
-
-    protected void navigateToChooseProteinMenu(FoodBaseType foodBaseType) {
-        MenuController.getInstance().navigate(new ChooseProteinMenu(foodBaseType));
+    private void navigateToRemoveOrAddToppings() {
+        MenuController.getInstance().navigate(new AddOrRemoveToppingsMenu(foodManager));
     }
 
     @Override

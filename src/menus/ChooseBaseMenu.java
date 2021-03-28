@@ -35,7 +35,8 @@ public class ChooseBaseMenu extends Menu {
     }
 
     private void navigateToChooseSignatureOrCustomMenu(FoodBaseType foodBaseType) {
-        MenuController.getInstance().navigate(new ChooseSignatureOrCustomMenu(foodBaseType));
+        FoodManager foodManager = new FoodManager(foodBaseType, Order::insertOrderable);
+        MenuController.getInstance().navigate(new ChooseSignatureOrCustomMenu(foodManager));
     }
 
     @Override

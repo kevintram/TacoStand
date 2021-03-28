@@ -3,6 +3,7 @@ package menus;
 import navigation.Menu;
 import navigation.MenuController;
 import navigation.MenuOption;
+import orderable.Combo;
 import orderable.FoodBase;
 import orderable.Topping;
 import orderable.ToppingDecorator;
@@ -14,9 +15,16 @@ import java.util.UUID;
 
 public class AddToppingMenu extends Menu {
     FoodBase food;
+    Combo combo;
 
     AddToppingMenu(UUID id) {
         food = (FoodBase) Order.getOrderable(id);
+        combo = null;
+    }
+
+    AddToppingMenu(FoodBase food, Combo combo) {
+        this.food = food;
+        this.combo = combo;
     }
 
     @Override
@@ -27,7 +35,6 @@ public class AddToppingMenu extends Menu {
     @Override
     protected ArrayList<MenuOption> getOptions() {
         ArrayList<MenuOption> options = new ArrayList<>();
-
 
         Set<Topping> unaddedToppings = new HashSet<>(Set.of(FoodDirectory.TOPPINGS));
 
@@ -41,12 +48,11 @@ public class AddToppingMenu extends Menu {
                     t.getString(),
                     () -> {
                         food = new ToppingDecorator(food, t);
-                        Order.updateOrderable(food);
+                        updateFood(food);
                         MenuController.getInstance().popBackStack();
                     }
             ));
         }
-
 
         options.add(new MenuOption(
                 "Cancel",
@@ -54,6 +60,14 @@ public class AddToppingMenu extends Menu {
         ));
 
         return options;
+    }
+
+    private void updateFood(FoodBase food) {
+        if (combo != null) {
+            combo.update(food);
+        } else {
+            Order.updateOrderable(food);
+        }
     }
 
     @Override

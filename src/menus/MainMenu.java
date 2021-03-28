@@ -3,9 +3,12 @@ package menus;
 import navigation.Menu;
 import navigation.MenuController;
 import navigation.MenuOption;
+import orderable.Combo;
 import orderable.Orderable;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class MainMenu extends Menu {
 
@@ -27,7 +30,13 @@ public class MainMenu extends Menu {
                 "Taco Salad",
                 "bowl with 3 crushed tacos" ,
                 () -> {
+                    Queue<FoodBaseType> foodQueue = new LinkedList<>();
+                    for (int i = 0; i < 3; i++) {
+                        foodQueue.add(FoodBaseType.TACO);
+                    }
 
+                    Combo combo = new Combo("Taco Salad","bowl with 3 crushed tacos");
+                    MenuController.getInstance().navigate(new ComboChooseSignatureOrCustomMenu(foodQueue, combo));
                 }
         ));
 

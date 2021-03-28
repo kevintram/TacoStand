@@ -61,7 +61,7 @@ public class ChooseSignatureOrCustomMenu extends Menu {
 
         options.add(new MenuOption(
                 "Build your own",
-                () -> MenuController.getInstance().navigate(new ChooseProteinMenu(foodBaseType))
+                () -> navigateToChooseProteinMenu(foodBaseType)
         ));
 
         return options;
@@ -75,9 +75,13 @@ public class ChooseSignatureOrCustomMenu extends Menu {
         };
     }
 
-    private void navigateToRemoveOrAddToppings(FoodBase food) {
+    protected void navigateToRemoveOrAddToppings(FoodBase food) {
         Order.insertOrderable(food);
         MenuController.getInstance().navigate(new AddOrRemoveToppingsMenu(food.getId()));
+    }
+
+    protected void navigateToChooseProteinMenu(FoodBaseType foodBaseType) {
+        MenuController.getInstance().navigate(new ChooseProteinMenu(foodBaseType));
     }
 
     @Override

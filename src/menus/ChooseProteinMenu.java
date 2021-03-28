@@ -9,9 +9,15 @@ import java.util.ArrayList;
 
 public class ChooseProteinMenu extends Menu {
     FoodBaseType foodBaseType;
+    Combo combo;
 
     ChooseProteinMenu(FoodBaseType foodBaseType) {
+        this(foodBaseType, null);
+    }
+
+    ChooseProteinMenu(FoodBaseType foodBaseType, Combo combo) {
         this.foodBaseType = foodBaseType;
+        this.combo = combo;
     }
 
     @Override
@@ -42,8 +48,14 @@ public class ChooseProteinMenu extends Menu {
     }
 
     private void navigateToAddOrRemoveToppingsMenu(FoodBase food) {
-        Order.insertOrderable(food);
-        MenuController.getInstance().navigate(new AddOrRemoveToppingsMenu(food.getId()));
+        if (combo != null) {
+            combo.add(food);
+            MenuController.getInstance().navigate(new AddOrRemoveToppingsMenu(food, combo));
+        } else {
+            Order.insertOrderable(food);
+            MenuController.getInstance().navigate(new AddOrRemoveToppingsMenu(food.getId()));
+        }
+
     }
 
     @Override

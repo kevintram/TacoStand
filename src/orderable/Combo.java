@@ -1,7 +1,5 @@
 package orderable;
 
-import menus.Order;
-
 import java.util.ArrayList;
 import java.util.UUID;
 

@@ -1,18 +1,21 @@
 package navigation;
 
+/**
+ * A data class for storing an option and it's description and how to handle when it's chosen.
+ */
 public final class MenuOption {
     private final String option;
     private String description; // nullable
-    private final OnChooseListener onChooseListener;
+    private final OnOptionChosenListener onOptionChosenListener;
 
-    public MenuOption(String option, OnChooseListener onChooseListener) {
-        this(option, null, onChooseListener);
+    public MenuOption(String option, OnOptionChosenListener onOptionChosenListener) {
+        this(option, null, onOptionChosenListener);
     }
 
-    public MenuOption(String option, String description, OnChooseListener onChooseListener) {
+    public MenuOption(String option, String description, OnOptionChosenListener onOptionChosenListener) {
         this.option = option;
         this.description = description;
-        this.onChooseListener = onChooseListener;
+        this.onOptionChosenListener = onOptionChosenListener;
     }
 
     public String getOption() {
@@ -27,7 +30,7 @@ public final class MenuOption {
         return description != null;
     }
 
-    public OnChooseListener getOnChooseListener() {
-        return onChooseListener;
+    public OnOptionChosenListener getOnChooseListener() {
+        return onOptionChosenListener;
     }
 }

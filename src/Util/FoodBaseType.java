@@ -1,4 +1,4 @@
-package menus;
+package Util;
 
 /**
  * All food base types currently supported.

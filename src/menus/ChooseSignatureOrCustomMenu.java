@@ -1,5 +1,7 @@
 package menus;
 
+import Util.FoodDirectory;
+import Util.Request.FoodRequest;
 import navigation.Menu;
 import navigation.MenuController;
 import navigation.MenuOption;
@@ -8,11 +10,11 @@ import orderable.*;
 import java.util.ArrayList;
 
 public class ChooseSignatureOrCustomMenu extends Menu {
-    FoodManager foodManager;
+    FoodRequest foodRequest;
 
-    ChooseSignatureOrCustomMenu(FoodManager foodManager) {
+    ChooseSignatureOrCustomMenu(FoodRequest foodRequest) {
         super();
-        this.foodManager = foodManager;
+        this.foodRequest = foodRequest;
     }
 
     @Override
@@ -28,10 +30,10 @@ public class ChooseSignatureOrCustomMenu extends Menu {
                 "Bada Beef Bada Boom",
                 "steak, lettuce, corn, guac",
                 () -> {
-                    foodManager.initFood(FoodDirectory.STEAK);
-                    foodManager.setOrderable(getToppingDecorator(FoodDirectory.LETTUCE));
-                    foodManager.setOrderable(getToppingDecorator(FoodDirectory.CORN));
-                    foodManager.setOrderable(getToppingDecorator(FoodDirectory.GUAC));
+                    foodRequest.initFood(FoodDirectory.STEAK);
+                    foodRequest.setOrderable(getToppingDecorator(FoodDirectory.LETTUCE));
+                    foodRequest.setOrderable(getToppingDecorator(FoodDirectory.CORN));
+                    foodRequest.setOrderable(getToppingDecorator(FoodDirectory.GUAC));
                     navigateToRemoveOrAddToppings();
                 }
         ));
@@ -40,10 +42,10 @@ public class ChooseSignatureOrCustomMenu extends Menu {
                 "The Big Bean",
                 "beans, lettuce, salsa, corn",
                 () -> {
-                    foodManager.initFood(FoodDirectory.BEANS);
-                    foodManager.setOrderable(getToppingDecorator(FoodDirectory.LETTUCE));
-                    foodManager.setOrderable(getToppingDecorator(FoodDirectory.SALSA));
-                    foodManager.setOrderable(getToppingDecorator(FoodDirectory.CORN));
+                    foodRequest.initFood(FoodDirectory.BEANS);
+                    foodRequest.setOrderable(getToppingDecorator(FoodDirectory.LETTUCE));
+                    foodRequest.setOrderable(getToppingDecorator(FoodDirectory.SALSA));
+                    foodRequest.setOrderable(getToppingDecorator(FoodDirectory.CORN));
                     navigateToRemoveOrAddToppings();
                 }
         ));
@@ -52,27 +54,27 @@ public class ChooseSignatureOrCustomMenu extends Menu {
                 "The Shrimp Shack",
                 "shrimp, chili sauce, red onion",
                 () -> {
-                    foodManager.initFood(FoodDirectory.SHRIMP);
-                    foodManager.setOrderable(getToppingDecorator(FoodDirectory.CHILI_SAUCE));
-                    foodManager.setOrderable(getToppingDecorator(FoodDirectory.RED_ONION));
+                    foodRequest.initFood(FoodDirectory.SHRIMP);
+                    foodRequest.setOrderable(getToppingDecorator(FoodDirectory.CHILI_SAUCE));
+                    foodRequest.setOrderable(getToppingDecorator(FoodDirectory.RED_ONION));
                     navigateToRemoveOrAddToppings();
                 }
         ));
 
         options.add(new MenuOption(
                 "Build your own",
-                () -> MenuController.getInstance().navigate(new ChooseProteinMenu(foodManager))
+                () -> MenuController.getInstance().navigate(new ChooseProteinMenu(foodRequest))
         ));
 
         return options;
     }
 
     private ToppingDecorator getToppingDecorator(Topping topping) {
-        return new ToppingDecorator(foodManager.getOrderable(), topping);
+        return new ToppingDecorator(foodRequest.getOrderable(), topping);
     }
 
     private void navigateToRemoveOrAddToppings() {
-        MenuController.getInstance().navigate(new AddOrRemoveToppingsMenu(foodManager));
+        MenuController.getInstance().navigate(new AddOrRemoveToppingsMenu(foodRequest));
     }
 
     @Override

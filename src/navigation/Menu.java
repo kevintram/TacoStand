@@ -10,15 +10,6 @@ public abstract class Menu {
     protected String prompt;
 
     /**
-     * Called whenever this menu is navigated to. If your menu has state that can may have
-     * been updated, you should update it in here.
-     */
-    public void onNavigated() {
-        prompt = getPrompt();
-        options = getOptions();
-    }
-
-    /**
      * @return the menu prompt.
      */
     protected abstract String getPrompt();
@@ -30,10 +21,18 @@ public abstract class Menu {
     protected abstract ArrayList<MenuOption> getOptions();
 
     /**
-     * @return Indicates whether the navController should
-     * continue popping after popping this menu.
+     * @return whether the MenuController should continue popping after popping this menu.
      */
     public abstract boolean isPopBackStackInclusive();
+
+    /**
+     * Called whenever this menu is navigated to. If your menu has state that can may have
+     * been updated, you should update it in here.
+     */
+    public void onNavigated() {
+        prompt = getPrompt();
+        options = getOptions();
+    }
 
     /**
      * Override this to print something after the prompt but before the options.

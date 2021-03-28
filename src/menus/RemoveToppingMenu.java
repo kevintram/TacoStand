@@ -1,5 +1,6 @@
 package menus;
 
+import Util.Request.FoodRequest;
 import navigation.Menu;
 import navigation.MenuController;
 import navigation.MenuOption;
@@ -9,10 +10,10 @@ import orderable.ToppingDecorator;
 import java.util.ArrayList;
 
 public class RemoveToppingMenu extends Menu {
-    FoodManager foodManager;
+    FoodRequest foodRequest;
 
-    RemoveToppingMenu(FoodManager foodManager) {
-        this.foodManager = foodManager;
+    RemoveToppingMenu(FoodRequest foodRequest) {
+        this.foodRequest = foodRequest;
     }
 
     @Override
@@ -22,7 +23,7 @@ public class RemoveToppingMenu extends Menu {
 
     @Override
     public void printPrefix() {
-        if (!(foodManager.getOrderable() instanceof ToppingDecorator)) {
+        if (!(foodRequest.getOrderable() instanceof ToppingDecorator)) {
             System.out.println("You don't have any toppings!");
         }
     }
@@ -31,14 +32,14 @@ public class RemoveToppingMenu extends Menu {
     protected ArrayList<MenuOption> getOptions() {
         ArrayList<MenuOption> options = new ArrayList<>();
 
-        if (foodManager.getOrderable() instanceof ToppingDecorator) {
-            Topping[] toppings = ((ToppingDecorator) foodManager.getOrderable()).getToppings();
+        if (foodRequest.getOrderable() instanceof ToppingDecorator) {
+            Topping[] toppings = ((ToppingDecorator) foodRequest.getOrderable()).getToppings();
 
             for (Topping t : toppings) {
                 options.add(new MenuOption(
                         t.getString(),
                         () -> {
-                            foodManager.setOrderable(((ToppingDecorator) foodManager.getOrderable()).remove(t));
+                            foodRequest.setOrderable(((ToppingDecorator) foodRequest.getOrderable()).remove(t));
                             MenuController.getInstance().popBackStack();
                         }
                 ));

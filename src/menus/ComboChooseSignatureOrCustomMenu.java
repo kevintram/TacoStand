@@ -1,26 +1,28 @@
 package menus;
 
-public class ComboChooseSignatureOrCustomMenu extends ChooseSignatureOrCustomMenu {
-    private ComboManager comboManager;
+import Util.Request.ComboRequest;
 
-    ComboChooseSignatureOrCustomMenu(ComboManager comboManager) {
+public class ComboChooseSignatureOrCustomMenu extends ChooseSignatureOrCustomMenu {
+    private ComboRequest comboRequest;
+
+    ComboChooseSignatureOrCustomMenu(ComboRequest comboRequest) {
         super(null); // pass null for constructor because don't want to double call dequeue
-        this.comboManager = comboManager;
+        this.comboRequest = comboRequest;
     }
 
     @Override
     public void printPrefix() {
-        System.out.println("For your " + foodManager.getFoodBaseType().name().toLowerCase() + "...");
+        System.out.println("For your " + foodRequest.getFoodBaseType().name().toLowerCase() + "...");
     }
 
     @Override
     public void onNavigated() {
-        foodManager = comboManager.dequeue();
+        foodRequest = comboRequest.dequeue();
         super.onNavigated();
     }
 
     @Override
     public boolean isPopBackStackInclusive() {
-        return comboManager.queueIsEmpty();
+        return comboRequest.queueIsEmpty();
     }
 }

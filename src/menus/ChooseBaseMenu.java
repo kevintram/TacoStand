@@ -1,5 +1,8 @@
 package menus;
 
+import Util.FoodBaseType;
+import Util.Request.FoodRequest;
+import Util.Order;
 import navigation.Menu;
 import navigation.MenuController;
 import navigation.MenuOption;
@@ -35,8 +38,8 @@ public class ChooseBaseMenu extends Menu {
     }
 
     private void navigateToChooseSignatureOrCustomMenu(FoodBaseType foodBaseType) {
-        FoodManager foodManager = new FoodManager(foodBaseType, Order::insertOrderable);
-        MenuController.getInstance().navigate(new ChooseSignatureOrCustomMenu(foodManager));
+        FoodRequest foodRequest = new FoodRequest(foodBaseType, Order::insertOrderable);
+        MenuController.getInstance().navigate(new ChooseSignatureOrCustomMenu(foodRequest));
     }
 
     @Override

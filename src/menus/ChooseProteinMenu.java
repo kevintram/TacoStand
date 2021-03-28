@@ -1,5 +1,7 @@
 package menus;
 
+import Util.FoodDirectory;
+import Util.Request.FoodRequest;
 import navigation.Menu;
 import navigation.MenuController;
 import navigation.MenuOption;
@@ -8,10 +10,10 @@ import orderable.*;
 import java.util.ArrayList;
 
 public class ChooseProteinMenu extends Menu {
-    FoodManager foodManager;
+    FoodRequest foodRequest;
 
-    ChooseProteinMenu(FoodManager foodManager) {
-        this.foodManager = foodManager;
+    ChooseProteinMenu(FoodRequest foodRequest) {
+        this.foodRequest = foodRequest;
     }
 
     @Override
@@ -27,7 +29,7 @@ public class ChooseProteinMenu extends Menu {
             options.add(new MenuOption(
                     p.getString(),
                     () -> {
-                        foodManager.initFood(p);
+                        foodRequest.initFood(p);
                         navigateToAddOrRemoveToppingsMenu();
                     }
             ));
@@ -36,7 +38,7 @@ public class ChooseProteinMenu extends Menu {
     }
 
     private void navigateToAddOrRemoveToppingsMenu() {
-        MenuController.getInstance().navigate(new AddOrRemoveToppingsMenu(foodManager));
+        MenuController.getInstance().navigate(new AddOrRemoveToppingsMenu(foodRequest));
     }
 
     @Override

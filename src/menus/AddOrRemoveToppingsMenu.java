@@ -1,5 +1,6 @@
 package menus;
 
+import Util.Request.FoodRequest;
 import navigation.Menu;
 import navigation.MenuController;
 import navigation.MenuOption;
@@ -7,9 +8,9 @@ import navigation.MenuOption;
 import java.util.ArrayList;
 
 public class AddOrRemoveToppingsMenu extends Menu {
-    FoodManager foodManager;
-    AddOrRemoveToppingsMenu(FoodManager foodManager) {
-        this.foodManager = foodManager;
+    FoodRequest foodRequest;
+    AddOrRemoveToppingsMenu(FoodRequest foodRequest) {
+        this.foodRequest = foodRequest;
     }
 
     @Override
@@ -28,18 +29,18 @@ public class AddOrRemoveToppingsMenu extends Menu {
 
         options.add(new MenuOption(
                 "Remove a topping",
-                () -> MenuController.getInstance().navigate(new RemoveToppingMenu(foodManager))
+                () -> MenuController.getInstance().navigate(new RemoveToppingMenu(foodRequest))
         ));
 
         options.add(new MenuOption(
                 "Add a topping",
-                () -> MenuController.getInstance().navigate(new AddToppingMenu(foodManager))
+                () -> MenuController.getInstance().navigate(new AddToppingMenu(foodRequest))
         ));
 
         options.add(new MenuOption(
                 "Finish",
                 () -> {
-                    foodManager.onOrderableFinishedListener.onOrderableFinished(foodManager.getOrderable());
+                    foodRequest.onRequestFinishedListener.onRequestFinished(foodRequest.getOrderable());
                     MenuController.getInstance().popBackStack();
                 }
         ));
@@ -50,7 +51,7 @@ public class AddOrRemoveToppingsMenu extends Menu {
     @Override
     public void printPrefix() {
         System.out.println("Here's what you have so far: ");
-        System.out.println(foodManager.getOrderable().getString());
+        System.out.println(foodRequest.getOrderable().getString());
         System.out.println();
     }
 

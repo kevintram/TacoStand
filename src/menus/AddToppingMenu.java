@@ -1,5 +1,7 @@
 package menus;
 
+import Util.FoodDirectory;
+import Util.Request.FoodRequest;
 import navigation.Menu;
 import navigation.MenuController;
 import navigation.MenuOption;
@@ -11,10 +13,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class AddToppingMenu extends Menu {
-    FoodManager foodManager;
+    FoodRequest foodRequest;
 
-    AddToppingMenu(FoodManager foodManager) {
-        this.foodManager = foodManager;
+    AddToppingMenu(FoodRequest foodRequest) {
+        this.foodRequest = foodRequest;
     }
 
     @Override
@@ -29,7 +31,7 @@ public class AddToppingMenu extends Menu {
         Set<Topping> unaddedToppings = new HashSet<>(Set.of(FoodDirectory.TOPPINGS));
 
         Set<Topping> addedToppings =
-                (foodManager.getOrderable() instanceof ToppingDecorator)? Set.of(((ToppingDecorator) foodManager.getOrderable()).getToppings()) : Set.of();
+                (foodRequest.getOrderable() instanceof ToppingDecorator)? Set.of(((ToppingDecorator) foodRequest.getOrderable()).getToppings()) : Set.of();
 
         unaddedToppings.removeAll(addedToppings);
 
@@ -37,7 +39,7 @@ public class AddToppingMenu extends Menu {
             options.add(new MenuOption(
                     t.getString(),
                     () -> {
-                        foodManager.setOrderable(new ToppingDecorator(foodManager.getOrderable(), t));
+                        foodRequest.setOrderable(new ToppingDecorator(foodRequest.getOrderable(), t));
                         MenuController.getInstance().popBackStack();
                     }
             ));

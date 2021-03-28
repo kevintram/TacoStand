@@ -1,13 +1,17 @@
-package menus;
+package Util.Request;
 
+import Util.FoodBaseType;
 import orderable.*;
 
-public class FoodManager extends OrderableManager {
+/**
+ * Class for managing a request for a food order and what occurs when it is "finished."
+ */
+public class FoodRequest extends OrderableRequest {
     private FoodBase food;
     private FoodBaseType foodBaseType;
-    // take in a foodBaseType because we won't protein the user wants until later
-    FoodManager(FoodBaseType foodBaseType, OnOrderableFinishedListener onOrderableFinishedListener) {
-        super(onOrderableFinishedListener);
+    // take in a foodBaseType because we won't know the protein the user wants until later
+    public FoodRequest(FoodBaseType foodBaseType, OnRequestFinishedListener onRequestFinishedListener) {
+        super(onRequestFinishedListener);
         this.foodBaseType = foodBaseType;
     }
 

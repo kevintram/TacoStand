@@ -41,7 +41,7 @@ public class MenuController {
         }
     }
 
-    public boolean isEmpty() {
+    public boolean isBackStackEmpty() {
         return backStack.isEmpty();
     }
 

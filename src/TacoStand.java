@@ -10,7 +10,7 @@ public class TacoStand {
 
         Scanner scan = new Scanner(System.in);
 
-        while (!menuController.isEmpty()) {
+        while (!menuController.isBackStackEmpty()) {
             Menu menu = menuController.getCurrMenu();
 
             menu.print();

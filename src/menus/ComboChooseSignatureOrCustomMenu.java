@@ -1,5 +1,6 @@
 package menus;
 
+import orderable.Combo;
 import util.request.ComboRequest;
 
 public class ComboChooseSignatureOrCustomMenu extends ChooseSignatureOrCustomMenu {
@@ -12,7 +13,14 @@ public class ComboChooseSignatureOrCustomMenu extends ChooseSignatureOrCustomMen
 
     @Override
     public void printPrefix() {
-        System.out.println("For your " + foodRequest.getFoodBaseType().name().toLowerCase() + "...");
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("For the ")
+                .append(foodRequest.getFoodBaseType().name().toLowerCase())
+                .append(" in the ")
+                .append(((Combo) comboRequest.getOrderable()).getName());
+
+        System.out.println(sb);
     }
 
     @Override

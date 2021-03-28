@@ -1,7 +1,7 @@
 package menus;
 
-import Util.FoodDirectory;
-import Util.Request.FoodRequest;
+import util.FoodDirectory;
+import util.request.FoodRequest;
 import navigation.Menu;
 import navigation.MenuController;
 import navigation.MenuOption;

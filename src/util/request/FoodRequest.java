@@ -1,6 +1,6 @@
-package Util.Request;
+package util.request;
 
-import Util.FoodBaseType;
+import util.FoodBaseType;
 import orderable.*;
 
 /**

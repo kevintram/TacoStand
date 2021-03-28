@@ -1,8 +1,8 @@
 package menus;
 
-import Util.FoodBaseType;
-import Util.Request.FoodRequest;
-import Util.Order;
+import util.FoodBaseType;
+import util.request.FoodRequest;
+import util.Order;
 import navigation.Menu;
 import navigation.MenuController;
 import navigation.MenuOption;

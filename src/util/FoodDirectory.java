@@ -1,4 +1,4 @@
-package Util;
+package util;
 
 import orderable.Protein;
 import orderable.Topping;

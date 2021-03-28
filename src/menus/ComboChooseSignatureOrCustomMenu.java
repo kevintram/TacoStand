@@ -1,6 +1,6 @@
 package menus;
 
-import Util.Request.ComboRequest;
+import util.request.ComboRequest;
 
 public class ComboChooseSignatureOrCustomMenu extends ChooseSignatureOrCustomMenu {
     private ComboRequest comboRequest;

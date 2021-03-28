@@ -1,6 +1,6 @@
 package menus;
 
-import Util.Request.FoodRequest;
+import util.request.FoodRequest;
 import navigation.Menu;
 import navigation.MenuController;
 import navigation.MenuOption;

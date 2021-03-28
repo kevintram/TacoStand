@@ -31,7 +31,7 @@ public class Bowl implements FoodBase {
 
     @Override
     public UUID getId() {
-        return null;
+        return id;
     }
 
     @Override

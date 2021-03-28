@@ -62,7 +62,11 @@ public class ToppingDecorator implements FoodBase {
 
     @Override
     public String getString() {
-        return inner.getString() + ", " + topping.getName();
+        StringBuilder sb = new StringBuilder();
+        sb.append(inner.getString().replaceAll("\\$(\\d+\\.\\d{2})", "")); // add inner but with price removed
+        sb.insert(0, "$" +  String.format("%.2f", getPrice())); // add correct price
+        sb.append(", ").append(topping.getName());
+        return sb.toString();
     }
 
     @Override

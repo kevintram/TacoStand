@@ -40,7 +40,7 @@ public class AddOrRemoveToppingsMenu extends Menu {
         options.add(new MenuOption(
                 "Finish",
                 () -> {
-                    foodRequest.onRequestFinishedListener.onRequestFinished(foodRequest.getOrderable());
+                    foodRequest.onRequestFinishedListener.onFinish(foodRequest.getOrderable());
                     MenuController.getInstance().popBackStack();
                 }
         ));

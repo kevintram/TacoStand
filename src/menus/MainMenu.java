@@ -145,7 +145,7 @@ public class MainMenu extends Menu {
 
     private void navigateToComboChooseSignatureOrCustomMenu(ComboRequest comboRequest) {
         // insert into the Order now because don't have to worry about adding a decorator
-        comboRequest.onRequestFinishedListener.onRequestFinished(comboRequest.getOrderable());
+        comboRequest.onRequestFinishedListener.onFinish(comboRequest.getOrderable());
         MenuController.getInstance().navigate(new ComboChooseSignatureOrCustomMenu(comboRequest));
     }
 

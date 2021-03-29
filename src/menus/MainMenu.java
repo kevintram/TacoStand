@@ -2,6 +2,7 @@ package menus;
 
 import util.request.ComboRequest;
 import util.FoodBaseType;
+import util.request.DoubleDeckerTacoRequest;
 import util.request.FoodRequest;
 import util.Order;
 import navigation.Menu;
@@ -9,6 +10,7 @@ import navigation.MenuController;
 import navigation.MenuOption;
 import orderable.Combo;
 import orderable.Orderable;
+import util.request.MultiRequest;
 
 import java.util.ArrayList;
 
@@ -39,7 +41,10 @@ public class MainMenu extends Menu {
                         comboRequest.queue(new FoodRequest(FoodBaseType.TACO, combo::add));
                     }
 
-                    navigateToComboChooseSignatureOrCustomMenu(comboRequest);
+                    // insert into the Order now because don't have to worry about adding a decorator
+                    comboRequest.onRequestFinishedListener.onFinish(comboRequest.getOrderable());
+
+                    navigateToMultiChooseSignatureOrCustomMenu(comboRequest);
                 }
         ));
 
@@ -47,7 +52,8 @@ public class MainMenu extends Menu {
                 "Double-decker Taco",
                 "taco inside a taco",
                 () -> {
-
+                    DoubleDeckerTacoRequest doubleDeckerTacoRequest = new DoubleDeckerTacoRequest(Order::insertOrderable);
+                    navigateToMultiChooseSignatureOrCustomMenu(doubleDeckerTacoRequest);
                 }
         ));
 
@@ -62,7 +68,10 @@ public class MainMenu extends Menu {
                         comboRequest.queue(new FoodRequest(FoodBaseType.TACO, combo::add));
                     }
 
-                    navigateToComboChooseSignatureOrCustomMenu(comboRequest);
+                    // insert into the Order now because don't have to worry about adding a decorator
+                    comboRequest.onRequestFinishedListener.onFinish(comboRequest.getOrderable());
+
+                    navigateToMultiChooseSignatureOrCustomMenu(comboRequest);
                 }
         ));
 
@@ -77,7 +86,10 @@ public class MainMenu extends Menu {
                     comboRequest.queue(new FoodRequest(FoodBaseType.TACO, combo::add));
                     comboRequest.queue(new FoodRequest(FoodBaseType.BURRITO, combo::add));
 
-                    navigateToComboChooseSignatureOrCustomMenu(comboRequest);
+                    // insert into the Order now because don't have to worry about adding a decorator
+                    comboRequest.onRequestFinishedListener.onFinish(comboRequest.getOrderable());
+
+                    navigateToMultiChooseSignatureOrCustomMenu(comboRequest);
                 }
         ));
 
@@ -92,7 +104,10 @@ public class MainMenu extends Menu {
                     comboRequest.queue(new FoodRequest(FoodBaseType.BURRITO, combo::add));
                     comboRequest.queue(new FoodRequest(FoodBaseType.BOWL, combo::add));
 
-                    navigateToComboChooseSignatureOrCustomMenu(comboRequest);
+                    // insert into the Order now because don't have to worry about adding a decorator
+                    comboRequest.onRequestFinishedListener.onFinish(comboRequest.getOrderable());
+
+                    navigateToMultiChooseSignatureOrCustomMenu(comboRequest);
                 }
         ));
 
@@ -118,7 +133,10 @@ public class MainMenu extends Menu {
 
                     comboRequest.queue(new FoodRequest(FoodBaseType.BOWL, combo::add));
 
-                    navigateToComboChooseSignatureOrCustomMenu(comboRequest);
+                    // insert into the Order now because don't have to worry about adding a decorator
+                    comboRequest.onRequestFinishedListener.onFinish(comboRequest.getOrderable());
+
+                    navigateToMultiChooseSignatureOrCustomMenu(comboRequest);
                 }
         ));
 
@@ -143,10 +161,8 @@ public class MainMenu extends Menu {
         return options;
     }
 
-    private void navigateToComboChooseSignatureOrCustomMenu(ComboRequest comboRequest) {
-        // insert into the Order now because don't have to worry about adding a decorator
-        comboRequest.onRequestFinishedListener.onFinish(comboRequest.getOrderable());
-        MenuController.getInstance().navigate(new ComboChooseSignatureOrCustomMenu(comboRequest));
+    private void navigateToMultiChooseSignatureOrCustomMenu(MultiRequest comboRequest) {
+        MenuController.getInstance().navigate(new MultiChooseSignatureOrCustomMenu(comboRequest));
     }
 
 

@@ -9,7 +9,7 @@ import java.util.Queue;
 /**
  * Class for managing a request for a combo order and what occurs when it is "finished."
  */
-public class ComboRequest extends OrderableRequest {
+public class ComboRequest extends MultiRequest {
     private Combo combo;
     private Queue<OrderableRequest> requests; // requests this request needs to fulfill
 
@@ -33,6 +33,7 @@ public class ComboRequest extends OrderableRequest {
      * Queue a request into the requests.
      * @param request the request to be queued.
      */
+    @Override
     public void queue(OrderableRequest request) {
         requests.add(request);
     }
@@ -41,7 +42,8 @@ public class ComboRequest extends OrderableRequest {
      * Returns and removes the next FoodRequest from the queue.
      * @return the next FoodManager
      */
-    public FoodRequest dequeue() {
+    @Override
+    public FoodRequest dequeueNextFoodRequest() {
         OrderableRequest peek = requests.peek();
 
         if (peek == null) {
@@ -51,9 +53,9 @@ public class ComboRequest extends OrderableRequest {
         if (peek instanceof ComboRequest) {
            if (((ComboRequest) peek).queueIsEmpty()) {
                requests.poll();
-               return dequeue();
+               return dequeueNextFoodRequest();
            } else {
-               return ((ComboRequest) peek).dequeue();
+               return ((ComboRequest) peek).dequeueNextFoodRequest();
            }
         } else if (peek instanceof FoodRequest) {
            requests.poll();
@@ -63,6 +65,7 @@ public class ComboRequest extends OrderableRequest {
         }
     }
 
+    @Override
     public boolean queueIsEmpty() {
         return requests.isEmpty();
     }

@@ -18,6 +18,11 @@ public class ChooseSignatureOrCustomMenu extends Menu {
     }
 
     @Override
+    public void printPrefix() {
+        System.out.println("For the " + foodRequest.getWhatItIs() + "...");
+    }
+
+    @Override
     protected String getPrompt() {
         return "Choose a signature or build your own";
     }

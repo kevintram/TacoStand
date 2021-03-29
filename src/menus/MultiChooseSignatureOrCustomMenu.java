@@ -11,18 +11,6 @@ public class MultiChooseSignatureOrCustomMenu extends ChooseSignatureOrCustomMen
     }
 
     @Override
-    public void printPrefix() {
-        StringBuilder sb = new StringBuilder();
-
-//        sb.append("For the ")
-//                .append(foodRequest.getFoodBaseType().name().toLowerCase())
-//                .append(" in the ")
-//                .append(((Combo) multiRequest.getOrderable()).getName());
-
-        System.out.println(sb);
-    }
-
-    @Override
     public void onNavigated() {
         foodRequest = multiRequest.dequeueNextFoodRequest();
         super.onNavigated();

@@ -9,10 +9,13 @@ import orderable.*;
 public class FoodRequest extends OrderableRequest {
     private FoodBase food;
     private FoodBaseType foodBaseType;
+    private String whatItIs;
+
     // take in a foodBaseType because we won't know the protein the user wants until later
-    public FoodRequest(FoodBaseType foodBaseType, OnRequestFinishedListener onRequestFinishedListener) {
+    public FoodRequest(FoodBaseType foodBaseType, String whatItIs, OnRequestFinishedListener onRequestFinishedListener) {
         super(onRequestFinishedListener);
         this.foodBaseType = foodBaseType;
+        this.whatItIs = whatItIs;
     }
 
     public void initFood(Protein protein) {
@@ -25,6 +28,10 @@ public class FoodRequest extends OrderableRequest {
 
     public FoodBaseType getFoodBaseType() {
         return foodBaseType;
+    }
+
+    public String getWhatItIs() {
+        return whatItIs;
     }
 
     @Override

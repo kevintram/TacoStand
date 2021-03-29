@@ -16,9 +16,9 @@ public class DoubleDeckerTacoRequest extends MultiRequest {
     public DoubleDeckerTacoRequest(OnRequestFinishedListener onRequestFinishedListener) {
         super(onRequestFinishedListener);
 
-        outerTacoRequest = new FoodRequest(FoodBaseType.TACO, (taco) -> outerTaco = (FoodBase) taco);
+        outerTacoRequest = new FoodRequest(FoodBaseType.TACO, "outer taco in the double decker taco" , (taco) -> outerTaco = (FoodBase) taco);
 
-        innerTacoRequest  = new FoodRequest(FoodBaseType.TACO, (taco) -> {
+        innerTacoRequest  = new FoodRequest(FoodBaseType.TACO, "inner taco in the double decker taco", (taco) -> {
             doubleDeckerTaco = new DoubleDeckerTaco((FoodBase) taco, outerTaco.getProtein());
 
             // add outerTaco's toppings if outerTaco is decorated

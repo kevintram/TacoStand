@@ -35,9 +35,9 @@ public class MainMenu extends Menu {
                     Combo combo = new Combo("Taco Salad","bowl with 3 crushed tacos");
                     LinkedList<OrderableRequest> requests = new LinkedList<>();
 
-                    for (int i = 0; i < 3; i++) {
-                        requests.add(new FoodRequest(FoodBaseType.TACO, combo::add));
-                    }
+                    requests.add(new FoodRequest(FoodBaseType.TACO, "first taco in the taco salad", combo::add));
+                    requests.add(new FoodRequest(FoodBaseType.TACO, "second taco in the taco salad", combo::add));
+                    requests.add(new FoodRequest(FoodBaseType.TACO, "third taco in the taco salad", combo::add));
 
                     ComboRequest comboRequest = new ComboRequest(combo, requests, Order::insertOrderable);
 
@@ -61,9 +61,10 @@ public class MainMenu extends Menu {
                     Combo combo = new Combo("Order of Tacos", "3 tacos");
 
                     LinkedList<OrderableRequest> requests = new LinkedList<>();
-                    for (int j = 0; j < 3; j++) {
-                        requests.add(new FoodRequest(FoodBaseType.TACO, combo::add));
-                    }
+
+                    requests.add(new FoodRequest(FoodBaseType.TACO, "first taco in the order of tacos", combo::add));
+                    requests.add(new FoodRequest(FoodBaseType.TACO, "second taco in the order of tacos", combo::add));
+                    requests.add(new FoodRequest(FoodBaseType.TACO, "third taco in the order of tacos", combo::add));
 
                     ComboRequest comboRequest = new ComboRequest(combo, requests, Order::insertOrderable);
 
@@ -78,9 +79,9 @@ public class MainMenu extends Menu {
                     Combo combo = new Combo("Traveler's Pack","2 tacos and 1 burrito");
 
                     LinkedList<OrderableRequest> requests = new LinkedList<>();
-                    requests.add(new FoodRequest(FoodBaseType.TACO, combo::add));
-                    requests.add(new FoodRequest(FoodBaseType.TACO, combo::add));
-                    requests.add(new FoodRequest(FoodBaseType.BURRITO, combo::add));
+                    requests.add(new FoodRequest(FoodBaseType.TACO, "first taco in the traveler's pack", combo::add));
+                    requests.add(new FoodRequest(FoodBaseType.TACO, "second taco in the traveler's pack", combo::add));
+                    requests.add(new FoodRequest(FoodBaseType.BURRITO, "burrito in the traveler's pack", combo::add));
 
                     ComboRequest comboRequest = new ComboRequest(combo, requests, Order::insertOrderable);
 
@@ -98,9 +99,9 @@ public class MainMenu extends Menu {
                     Combo combo = new Combo("Sampler","1 taco, 1 burrito, 1 bowl");
 
                     LinkedList<OrderableRequest> requests = new LinkedList<>();
-                    requests.add(new FoodRequest(FoodBaseType.TACO, combo::add));
-                    requests.add(new FoodRequest(FoodBaseType.BURRITO, combo::add));
-                    requests.add(new FoodRequest(FoodBaseType.BOWL, combo::add));
+                    requests.add(new FoodRequest(FoodBaseType.TACO, "taco in the sampler pack", combo::add));
+                    requests.add(new FoodRequest(FoodBaseType.BURRITO, "burrito in the sampler pack", combo::add));
+                    requests.add(new FoodRequest(FoodBaseType.BOWL, "bowl in the sampler pack", combo::add));
 
                     ComboRequest comboRequest = new ComboRequest(combo, requests, Order::insertOrderable);
 
@@ -120,20 +121,19 @@ public class MainMenu extends Menu {
 
                         LinkedList<OrderableRequest> orderRequests = new LinkedList<>();
 
-                        for (int j = 0; j < 3; j++) {
-                            orderRequests.add(new FoodRequest(FoodBaseType.TACO, order::add));
-                        }
+                        orderRequests.add(new FoodRequest(FoodBaseType.TACO, "first taco in the order", order::add));
+                        orderRequests.add(new FoodRequest(FoodBaseType.TACO, "second taco in the order", order::add));
+                        orderRequests.add(new FoodRequest(FoodBaseType.TACO, "third taco in the order", order::add));
 
                         ComboRequest orderManager = new ComboRequest(order, orderRequests ,combo::add);
 
                         comboRequests.add(orderManager);
                     }
 
-                    for (int i = 0; i < 2; i++) {
-                        comboRequests.add(new FoodRequest(FoodBaseType.BURRITO, combo::add));
-                    }
+                    comboRequests.add(new FoodRequest(FoodBaseType.BURRITO, "first burrito in the traveler's pack", combo::add));
+                    comboRequests.add(new FoodRequest(FoodBaseType.BURRITO, "second burrito in the traveler's pack", combo::add));
 
-                    comboRequests.add(new FoodRequest(FoodBaseType.BOWL, combo::add));
+                    comboRequests.add(new FoodRequest(FoodBaseType.BOWL, "bowl in the traveler's pack", combo::add));
 
                     ComboRequest comboRequest = new ComboRequest(combo, comboRequests, Order::insertOrderable);
 

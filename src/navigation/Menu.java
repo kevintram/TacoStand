@@ -26,7 +26,7 @@ public abstract class Menu {
     public abstract boolean isPopBackStackInclusive();
 
     /**
-     * Called whenever this menu is navigated to. If your menu has state that can may have
+     * Called whenever this menu is navigated to. If your menu has state that may have
      * been updated, you should update it in here.
      */
     public void onNavigated() {

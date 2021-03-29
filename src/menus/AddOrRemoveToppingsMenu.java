@@ -14,11 +14,6 @@ public class AddOrRemoveToppingsMenu extends Menu {
     }
 
     @Override
-    public void onNavigated() {
-        super.onNavigated();
-    }
-
-    @Override
     protected String getPrompt() {
         return "Remove or add any toppings?";
     }

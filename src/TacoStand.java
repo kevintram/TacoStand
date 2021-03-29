@@ -1,6 +1,7 @@
 import menus.MainMenu;
 import navigation.Menu;
 import navigation.MenuController;
+
 import java.util.Scanner;
 
 public class TacoStand {
@@ -15,10 +16,17 @@ public class TacoStand {
 
             menu.print();
 
-            int response = scan.nextInt();
-            menu.choose(response);
+            int response;
 
-            System.out.println();
+            try {
+                response = Integer.parseInt(scan.nextLine());
+                menu.choose(response);
+                System.out.println();
+            } catch(NumberFormatException  e) {
+                System.out.println("Error: Please input a number.");
+                System.out.println();
+            }
+
         }
     }
 }

@@ -53,8 +53,10 @@ public abstract class Menu {
     }
 
     public final void choose(int choice) {
-        if (choice <= options.size()) {
+        if (choice >= 1 && choice <= options.size()) {
             options.get(choice - 1).getOnChooseListener().onChoose();
+        } else {
+            System.out.println("Error: Please print a number in range");
         }
     }
 }

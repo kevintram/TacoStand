@@ -1,5 +1,6 @@
 package menus;
 
+import orderable.Orderable;
 import util.FoodDirectory;
 import util.request.FoodRequest;
 import navigation.Menu;
@@ -8,9 +9,7 @@ import navigation.MenuOption;
 import orderable.Topping;
 import orderable.ToppingDecorator;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class AddToppingMenu extends Menu {
     FoodRequest foodRequest;
@@ -28,10 +27,17 @@ public class AddToppingMenu extends Menu {
     protected ArrayList<MenuOption> getOptions() {
         ArrayList<MenuOption> options = new ArrayList<>();
 
-        Set<Topping> unaddedToppings = new HashSet<>(Set.of(FoodDirectory.TOPPINGS));
+        Set<Topping> unaddedToppings = new HashSet<>(Arrays.asList(FoodDirectory.TOPPINGS));
 
-        Set<Topping> addedToppings =
-                (foodRequest.getOrderable() instanceof ToppingDecorator)? Set.of(((ToppingDecorator) foodRequest.getOrderable()).getToppings()) : Set.of();
+
+        Set<Topping> addedToppings;
+
+        Orderable orderable = foodRequest.getOrderable();
+        if (orderable instanceof ToppingDecorator) {
+            addedToppings = new HashSet<>(Arrays.asList(((ToppingDecorator) orderable).getToppings()));
+        } else {
+            addedToppings = Collections.emptySet();
+        }
 
         unaddedToppings.removeAll(addedToppings);
 

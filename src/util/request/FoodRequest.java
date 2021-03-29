@@ -16,10 +16,10 @@ public class FoodRequest extends OrderableRequest {
     }
 
     public void initFood(Protein protein) {
-        food = switch (foodBaseType) {
-            case TACO -> new Taco(protein);
-            case BURRITO -> new Burrito(protein);
-            case BOWL -> new Bowl(protein);
+       switch (foodBaseType) {
+           case TACO: food =  new Taco(protein);
+           case BURRITO: food =  new Burrito(protein);
+           case BOWL: food =  new Bowl(protein);
         };
     }
 

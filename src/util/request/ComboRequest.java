@@ -4,19 +4,26 @@ import orderable.Combo;
 import orderable.Orderable;
 
 import java.util.LinkedList;
-import java.util.Queue;
 
 /**
- * Class for managing a request for a combo order and what occurs when it is "finished."
+ * Class for managing a request for a combo order. OnFinish will not need to be called, it will be called when the last
+ * request is finished.
  */
 public class ComboRequest extends MultiRequest {
     private Combo combo;
-    private Queue<OrderableRequest> requests; // requests this request needs to fulfill
+    private final LinkedList<OrderableRequest> requests;
 
-    public ComboRequest(Combo combo, OnRequestFinishedListener onRequestFinishedListener) {
+    public ComboRequest(Combo combo, LinkedList<OrderableRequest> requests, OnRequestFinishedListener onRequestFinishedListener) {
         super(onRequestFinishedListener);
         this.combo = combo;
-        requests = new LinkedList<>();
+        this.requests = requests;
+
+        // when last request is done, this is finished
+        OnRequestFinishedListener lastOnRequestFinishedListener = requests.getLast().onRequestFinishedListener;
+        requests.getLast().onRequestFinishedListener = (orderable) -> {
+            lastOnRequestFinishedListener.onFinish(orderable);
+            this.onRequestFinishedListener.onFinish(combo);
+        };
     }
 
     @Override
@@ -27,15 +34,6 @@ public class ComboRequest extends MultiRequest {
     @Override
     public void setOrderable(Orderable orderable) {
         combo = (Combo) orderable;
-    }
-
-    /**
-     * Queue a request into the requests.
-     * @param request the request to be queued.
-     */
-    @Override
-    public void queue(OrderableRequest request) {
-        requests.add(request);
     }
 
     /**

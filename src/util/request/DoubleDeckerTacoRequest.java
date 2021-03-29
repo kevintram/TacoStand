@@ -4,7 +4,8 @@ import orderable.*;
 import util.FoodBaseType;
 
 /**
- * Food request for a double decker taco. onFinish does not need to be called here, it will be managed by itself.
+ * Food request for a double decker taco. onFinish does not need to be called here, it will be called when the last
+ * request is finished.
  */
 public class DoubleDeckerTacoRequest extends MultiRequest {
     private FoodBase doubleDeckerTaco; // nullable
@@ -31,11 +32,6 @@ public class DoubleDeckerTacoRequest extends MultiRequest {
             // finally call on finish
             onRequestFinishedListener.onFinish(doubleDeckerTaco);
         });
-    }
-
-    @Override
-    public void queue(OrderableRequest request) {
-        throw new IllegalStateException("Error: This cannot be queued!");
     }
 
     @Override

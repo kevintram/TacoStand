@@ -8,7 +8,6 @@ public abstract class MultiRequest extends OrderableRequest {
         super(onRequestFinishedListener);
     }
 
-    public abstract void queue(OrderableRequest request);
     public abstract FoodRequest dequeueNextFoodRequest();
     public abstract boolean queueIsEmpty();
 }
